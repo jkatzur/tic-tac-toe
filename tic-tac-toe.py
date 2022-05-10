@@ -16,12 +16,16 @@ class tikTacToeGame:
     # TODO make this not embarrassingly verbose
     def check_win(self):
         for i in range(3):
+            # Check each row
             if self.board[i][0] != 0 and self.board[i][0] == self.board[i][1] and self.board[i][0] == self.board[i][2]:
                 return self.board[i][0]
+            # Check each column
             if self.board[0][i] != 0 and self.board[0][i] == self.board[1][i] and self.board[0][i] == self.board[2][i]:
                 return self.board[0][i]
+        # Check diagonal upper left to lower right
         if self.board[0][0] != 0 and self.board[0][0] == self.board[1][1] and self.board[0][0] == self.board[2][2]:
             return self.board[0][0]
+        # Check diagonal bottow left to upper right
         if self.board[0][2] != 0 and self.board[0][2] == self.board[1][1] and self.board[0][2] == self.board[2][0]:
             return self.board[0][2]
         return 0
@@ -81,7 +85,8 @@ if __name__ == '__main__':
         currGame = tikTacToeGame(player_one_name=player_one_name, player_two_name=player_two_name, x=player_turn)
         game_on = True
         turn = 1
-        print(f"\n---- Starting tic-tac-toe between {player_one_name} and {player_two_name} ----\n")
+        print(f"\n---- Starting tic-tac-toe between {player_one_name} playing {'X' if player_turn == 1 else 'O'} and {player_two_name} playing {'X' if player_turn == 2 else 'O'}----\n")
+        print(f"Input moves with (Row, Column). For example... \n0, 2 would be upper right\n1, 0 would be middle left\nFormat is 0|1|2, 0|1|2\n\n")
         
         # Core game loop
         while game_on:
@@ -96,7 +101,7 @@ if __name__ == '__main__':
                         currGame.board[int(move[0])][int(move[1])] = player_turn
                         break
                 else:
-                    print(f"Your guess should be of the format 0|1|2, 0|1|2 where the first number is the column, second is the row")
+                    print(f"Your guess should be of the format 0|1|2, 0|1|2 where the first number is the row, second is the column")
 
             for row in currGame.board:
                 disp = ''
