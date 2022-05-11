@@ -53,6 +53,8 @@ class tikTacToeGame:
     
 # For when you are running a game via the command line
 if __name__ == '__main__':
+    # User input for game
+
     # Get Player One's name
     while True:
         try: 
@@ -87,16 +89,19 @@ if __name__ == '__main__':
         else:
             print("Please enter R for Random starter, 1 for Player 1, or 2 for Player 2")
 
-    still_playing = True
+
+    # Everyone loves stats!
     player_one_wins = 0
     player_two_wins = 0
     ties = 0
+
+    still_playing = True
     while still_playing:
-        # Setup the game
+        # Setup this game
         currGame = tikTacToeGame(player_one_name=player_one_name, player_two_name=player_two_name, x=player_turn)
         game_on = True
         turn = 1
-        print(f"\n---- Starting tic-tac-toe between {player_one_name} playing {'X' if player_turn == 1 else 'O'} and {player_two_name} playing {'X' if player_turn == 2 else 'O'}----\n")
+        print(f"\n---- Starting tic-tac-toe between {player_one_name} playing {'X' if player_turn == 1 else 'O'} and {player_two_name} playing {'X' if player_turn == 2 else 'O'}---- \n")
         print(f"Input moves with (Row, Column). For example... \n0, 2 would be upper right\n1, 0 would be middle left\nFormat is 0|1|2, 0|1|2\n\n")
         
         # Core game loop
