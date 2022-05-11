@@ -13,7 +13,6 @@ class tikTacToeGame:
                         [0, 0, 0],
                         [0, 0, 0]]
     
-    # TODO make this not embarrassingly verbose
     def check_win(self):
         for i in range(3):
             # Check each row
@@ -38,6 +37,18 @@ class tikTacToeGame:
                     non_empty += 1
 
         return True if non_empty == 9 else False
+
+    def display_board(self):
+        for row in self.board:
+            disp = ''
+            for c in row:
+                if c == self.x:
+                    disp += 'X'
+                elif c == 0:
+                    disp += '_'
+                else:
+                    disp += 'O'
+            print(disp)
 
     
 # For when you are running a game via the command line
@@ -90,8 +101,9 @@ if __name__ == '__main__':
         
         # Core game loop
         while game_on:
-            # Input guess
+            # This while is a single turn
             while True:
+                # Player inputs the move
                 move = input(f"{player_one_name if player_turn == 1 else player_two_name}'s turn. Where do you want to go?\t")
                 move = re.findall('([012])', move)
                 if len(move) == 2:
@@ -103,16 +115,7 @@ if __name__ == '__main__':
                 else:
                     print(f"Your guess should be of the format 0|1|2, 0|1|2 where the first number is the row, second is the column")
 
-            for row in currGame.board:
-                disp = ''
-                for c in row:
-                    if c == currGame.x:
-                        disp += 'X'
-                    elif c == 0:
-                        disp += '_'
-                    else:
-                        disp += 'O'
-                print(disp)
+            currGame.display_board()
 
             if currGame.check_win():
                 if player_turn == 1:
@@ -129,11 +132,8 @@ if __name__ == '__main__':
                 print(f"Score is {player_one_name}: {player_one_wins}; {player_two_name}: {player_two_wins}, Ties: {ties}")
                 game_on = False
 
-            # TODO use the simple switch for this
-            if player_turn == 1:
-                player_turn = 2
-            else:
-                player_turn = 1
+            # Switch player's turn
+            player_turn = 2 if player_turn == 1 else 1
 
         # Do you want to play again?
         while True:
